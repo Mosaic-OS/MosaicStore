@@ -3,8 +3,8 @@ package app.grapheneos.apps.ui
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import app.grapheneos.apps.core.PackageState
 import app.grapheneos.apps.PackageStates
+import app.grapheneos.apps.core.PackageState
 
 abstract class PackageListFragment<T : ViewBinding> : ViewBindingFragment<T>(), PackageStates.StateListener {
     protected lateinit var packages: Map<String, PackageState>

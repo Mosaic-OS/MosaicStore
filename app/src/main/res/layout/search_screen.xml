@@ -76,6 +76,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pkg_source_grapheneos_build" />
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/pkg_source_MosaicOS"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pkg_source_mosaicos" />
+
         </com.google.android.material.chip.ChipGroup>
 
     </HorizontalScrollView>

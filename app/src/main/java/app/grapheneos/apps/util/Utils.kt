@@ -2,32 +2,20 @@ package app.grapheneos.apps.util
 
 import android.content.Context
 import android.net.Uri
-import android.os.UserManager
 import android.util.ArrayMap
-import android.view.MenuItem
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.core.content.getSystemService
 import app.grapheneos.apps.core.appContext
 import app.grapheneos.apps.core.appResources
-import app.grapheneos.apps.core.isPrivilegedInstaller
 import app.grapheneos.apps.core.mainHandler
 import app.grapheneos.apps.core.mainThread
 import app.grapheneos.apps.core.selfPkgName
-import app.grapheneos.apps.core.userManager
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ensureActive
 import org.json.JSONArray
-import java.io.DataInputStream
-import java.io.DataOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-import java.nio.charset.StandardCharsets.UTF_8
 import java.util.concurrent.atomic.AtomicLong
-import kotlin.coroutines.coroutineContext
 
 fun checkMainThread() {
     check(Thread.currentThread() === mainThread)

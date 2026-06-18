@@ -2,7 +2,8 @@
 
     <style name="Theme.Apps.DayNight" parent="Theme.Apps" />
 
-    <style name="Theme.Apps" parent="Theme.Material3.DayNight.NoActionBar">
+    !-- DynamicColors so the app follows the device's Material You (system overlay) colors. -->
+    <style name="Theme.Apps" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- camelcase key and file names are leftovers from the initial version-->
+
+    <bool name="pref_def_background_update_check" translatable="false">true</bool>
+
+    <bool name="pref_def_auto_update_packages" translatable="false">true</bool>
+
+    <!--    in milliseconds, leftover from the initial version-->
+
+    <string-array name="pref_values_background_update_check_interval">
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>21600000</item>
+        <item>32400000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+        <item>604800000</item>
+    </string-array>
+
+    <string-array name="pref_labels_entries_background_update_check_interval">
+        <item>Óránként</item>
+        <item>2 óránként</item>
+        <item>6 óránként</item>
+        <item>9 óránként</item>
+        <item>12 óránként</item>
+        <item>Naponta</item>
+        <item>Hetente</item>
+    </string-array>
+
+    <string name="pref_def_network_type_for_bg_update_job">1</string>
+
+    <string-array name="pref_values_network_type_for_auto_update_job">
+<!-- JobInfo.NETWORK_TYPE_ANY-->
+        <item>1</item>
+<!-- JobInfo.NETWORK_TYPE_NOT_ROAMING-->
+        <item>3</item>
+<!-- JobInfo.NETWORK_TYPE_UNMETERED-->
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_labels_network_type_for_auto_updates">
+        <item>Bármely</item>
+        <item>Nem roaming</item>
+        <item>Korlátlan</item>
+    </string-array>
+
+    <string name="pref_key_default_release_channel">default_release_channel</string>
+
+    <string name="pref_key_always_allow_nocode_updates">always_allow_nocode_updates</string>
+    <bool name="pref_def_always_allow_noCode_updates">true</bool>
+
+    <string name="pref_background_update_check">Ellenőrizze a frissítéseket</string>
+    <string name="pref_background_update_check_summary_on">A frissítések rendszeresen ellenőrizzük a háttérben</string>
+    <string name="pref_background_update_check_summary_off">Háttérellenőrzések letiltva</string>
+
+    <string name="pref_background_update_check_interval">Frissítések ellenőrzésének gyakorisága</string>
+    <string name="pref_auto_update_packages">Appok automatikus frissítése</string>
+    <string name="pref_network_type_for_auto_updates">Engedélyezett hálózati típus az automatikus frissítésekhez</string>
+
+    <string name="pref_always_allow_noCode_updates">Konfigurációs fájlok és erőforrások automatikus frissítése</string>
+    <string name="pref_always_allow_noCode_updates_summary_on">Akkor is frissülnek, ha az automatikus frissítés le van tiltva</string>
+    <string name="pref_always_allow_noCode_updates_summary_off">Csak akkor frissülnek, ha engedélyezve van a rendszeres automatikus frissítés</string>
+
+</resources>

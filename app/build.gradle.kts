@@ -40,17 +40,17 @@ android {
     namespace = "app.grapheneos.apps"
 
     defaultConfig {
-        applicationId = "app.grapheneos.apps"
+        applicationId = "apps.mosaicos.io"
         minSdk = 31
         targetSdk = 36
-        versionCode = 36
+        versionCode = 6
         versionName = versionCode.toString()
 
         buildConfigField(String::class.java.name, "REPO_BASE_URL",
-            "\"${System.getenv("REPO_BASE_URL") ?: "https://apps.grapheneos.org"}\"")
+            "\"${System.getenv("REPO_BASE_URL") ?: "https://appstore.mosaicos.io"}\"")
 
         buildConfigField(String::class.java.name, "REPO_PUBLIC_KEY", "\"${
-            System.getenv("REPO_PUBLIC_KEY") ?: "RWQtZwEu1br1lMh911L3yPOs97cQb9LOks/ALBbqGl21ul695ocWR/ir"
+            System.getenv("REPO_PUBLIC_KEY") ?: "RWTnV7mEvJhA9c+8DeH/O8QDSGrJ/B0M5UcJnqKO8z57/y7PE7PNOY8o"
         }\"")
 
         buildConfigField(String::class.java.name, "REPO_KEY_VERSION",
@@ -78,7 +78,7 @@ android {
     }
 
     androidResources {
-        localeFilters += listOf("en")
+        localeFilters += listOf("en", "hu")
     }
 
     packaging {

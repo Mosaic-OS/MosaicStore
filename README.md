@@ -1,0 +1,1 @@
+This is an independent project based on [GrapheneOS AppStore](https://github.com/GrapheneOS/AppStore). It is **not affiliated with, endorsed by, or maintained by the GrapheneOS team** - all credit for the original application goes to its authors.

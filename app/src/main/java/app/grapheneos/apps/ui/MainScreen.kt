@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import androidx.core.view.MenuProvider
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import app.grapheneos.apps.BuildConfig
 import app.grapheneos.apps.PackageStates
 import app.grapheneos.apps.R
 import app.grapheneos.apps.core.RepoUpdateError
-import app.grapheneos.apps.core.mainHandler
 import app.grapheneos.apps.databinding.MainScreenBinding
 import app.grapheneos.apps.util.intent
 import com.google.android.material.color.MaterialColors
@@ -23,7 +23,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 
 open class MainScreen : PackageListFragment<MainScreenBinding>(), MenuProvider {
@@ -55,19 +54,20 @@ open class MainScreen : PackageListFragment<MainScreenBinding>(), MenuProvider {
         if (PackageStates.repo.isDummy) {
             val job = PackageStates.repoUpdateJob
             if (job != null) {
-                mainHandler.post {
-                    runBlocking {
-                        try {
-                            suppressRepoUpdateResultCallback = true
-                            withTimeout(500) {
-                                val error = job.await()
-                                onRepoUpdateResult(error)
-                            }
-                        } catch (e: TimeoutCancellationException) {
-                            views.swipeRefreshContainer.isRefreshing = true
-                        } finally {
-                            suppressRepoUpdateResultCallback = false
+                viewLifecycleOwner.lifecycleScope.launch {
+                    // Suspend (do NOT block the main thread) for up to 500ms; if the in-flight
+                    // repo update finishes first, apply its result without flashing the refresh
+                    // indicator, otherwise show it. Auto-cancels if the view is destroyed.
+                    try {
+                        suppressRepoUpdateResultCallback = true
+                        withTimeout(500) {
+                            val error = job.await()
+                            onRepoUpdateResult(error)
                         }
+                    } catch (_: TimeoutCancellationException) {
+                        views.swipeRefreshContainer.isRefreshing = true
+                    } finally {
+                        suppressRepoUpdateResultCallback = false
                     }
                 }
             }
@@ -137,7 +137,7 @@ open class MainScreen : PackageListFragment<MainScreenBinding>(), MenuProvider {
         }
 
         if (BuildConfig.DEBUG) {
-            newWindowMenuItem = menu.add("New window")
+            newWindowMenuItem = menu.add(R.string.new_window)
         }
     }
 

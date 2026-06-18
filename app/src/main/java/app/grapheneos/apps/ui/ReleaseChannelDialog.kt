@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import app.grapheneos.apps.core.ReleaseChannel
 import app.grapheneos.apps.PackageStates
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import app.grapheneos.apps.R
+import app.grapheneos.apps.core.ReleaseChannel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ReleaseChannelDialog : DialogFragment() {
 

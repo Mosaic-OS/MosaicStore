@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
+    <!--
+        HTTPS is enforced (no cleartext). Certificate pinning is not configured
+        for the MosaicOS repo (appstore.mosaicos.io) yet
+    -->
     <base-config cleartextTrafficPermitted="false"/>
-    <domain-config>
-        <domain includeSubdomains="true">apps.grapheneos.org</domain>
-        <pin-set expiration="2027-04-01">
-            <!-- ISRG Root X1 -->
-            <pin digest="SHA-256">C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=</pin>
-
-            <!-- ISRG Root X2 -->
-            <pin digest="SHA-256">diGVwiVYbubAI3RW4hB9xU8e/CH2GnkuvVFZE8zmgzI=</pin>
-
-            <!-- ISRG Root YE -->
-            <pin digest="SHA-256">sCkq5UWXjg+7mKu9lMhhYF5bGLsy7VI/UNW3tccdR7w=</pin>
-
-            <!-- ISRG Root YR -->
-            <pin digest="SHA-256">fk6IOKit1ild5647BH06ujSIq5XbCgqlbYl6ANhhi88=</pin>
-
-            <!-- ECDSA secp256r1 backup key -->
-            <pin digest="SHA-256">drRsq5LgQXsqyraaN1122zCpsfaOpVr0hN5VG1VvQ3E=</pin>
-
-            <!-- ECDSA secp384r1 backup key -->
-            <pin digest="SHA-256">r5ZtzhR6jqa5GuGWMqABMUjTyeiln5w4CAcEtjsMrgw=</pin>
-        </pin-set>
-    </domain-config>
 </network-security-config>

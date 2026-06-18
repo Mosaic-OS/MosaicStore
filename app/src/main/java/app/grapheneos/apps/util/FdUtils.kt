@@ -2,7 +2,6 @@ package app.grapheneos.apps.util
 
 import android.os.ParcelFileDescriptor
 import android.system.ErrnoException
-import android.system.Int64Ref
 import android.system.Os
 import android.system.OsConstants
 import android.system.OsConstants.EINVAL

@@ -2,7 +2,6 @@ package app.grapheneos.apps.util
 
 import java.io.DataInputStream
 import java.io.DataOutputStream
-import java.nio.charset.StandardCharsets
 import java.nio.charset.StandardCharsets.UTF_8
 
 fun DataInputStream.readByteArray(): ByteArray {

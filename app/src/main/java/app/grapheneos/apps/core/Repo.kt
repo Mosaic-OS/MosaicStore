@@ -65,7 +65,8 @@ class Repo(json: JSONObject, val eTag: String, val isDummy: Boolean = false) {
                 // PackageInfos are cached by the OS. Populating this cache in advance speeds up
                 // subsequent requests
                 CoroutineScope(Dispatchers.Default).launch {
-                    pkgManager.getPackageInfoOrNull(manifestPackageName)
+                    // best-effort cache warming; a PackageManager failure must not crash the process
+                    runCatching { pkgManager.getPackageInfoOrNull(manifestPackageName) }
                 }
             }
         }
@@ -145,6 +146,7 @@ enum class PackageSource(@param:StringRes val uiName: Int) {
     GrapheneOS_build(R.string.pkg_source_grapheneos_build),
     Mirror(R.string.pkg_source_mirror),
     Google(R.string.pkg_source_google),
+    MosaicOS(R.string.pkg_source_mosaicos),
 }
 
 class RPackageGroup(val name: String) {
@@ -162,7 +164,8 @@ class RPackageContainer(val repo: Repo, val packageName: String,
     val description = json.opt("description") as String?
     val source: PackageSource = (json.opt("source") as String?).let {
         if (it != null) {
-            PackageSource.valueOf(it)
+            // An unknown/typo'd source string must not abort the whole repo parse.
+            runCatching { PackageSource.valueOf(it) }.getOrDefault(PackageSource.GrapheneOS_build)
         } else {
             PackageSource.GrapheneOS_build
         }
@@ -203,7 +206,7 @@ class RPackageContainer(val repo: Repo, val packageName: String,
     // This allows to significantly simplify the dependency resolution process (otherwise release
     // channel could be changed for each of them independently)
     val group: RPackageGroup? = run {
-        val groupName = json.opt("group") as String? ?: return@run null
+        val groupName = json.opt("group") as? String? ?: return@run null
         val group = repo.groups.getOrPut(groupName) {
             RPackageGroup(groupName)
         }
@@ -295,11 +298,7 @@ private val emptyDependencyArray = emptyArray<Dependency>()
 
 private fun parseDependencies(json: JSONObject, repo: Repo): Array<Dependency>? {
     val arr: JSONArray? = json.optJSONArray("deps2") ?: json.optJSONArray("deps")
-    return if (arr != null) {
-        arr.asStringList().map { Dependency(it, repo) }.toTypedArray()
-    } else {
-        null
-    }
+    return arr?.asStringList()?.map { Dependency(it, repo) }?.toTypedArray()
 }
 
 // "Repo package"
@@ -415,7 +414,7 @@ class RPackage(val common: RPackageContainer, val versionCode: Long, val abis: A
 
         var cache = localeCache
 
-        val locales: LocaleList = config.getLocales()
+        val locales: LocaleList = config.locales
         val tags = locales.toLanguageTags()
         if (cache != null) {
             if (cache.first != tags) {
@@ -444,7 +443,7 @@ class RPackage(val common: RPackageContainer, val versionCode: Long, val abis: A
                 val localeManager = localeManager!!
                 val list = try {
                     localeManager.getApplicationLocales(packageName)
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     // getApplicationLocales() is allowed only if we are currently the
                     // installer-of-record for this package. It also could have been racily
                     // uninstalled, which results in an IllegalArgumentException

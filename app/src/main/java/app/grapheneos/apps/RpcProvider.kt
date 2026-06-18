@@ -13,8 +13,8 @@ import app.grapheneos.apps.autoupdate.AutoUpdatePrefs
 import app.grapheneos.apps.core.InstallParams
 import app.grapheneos.apps.core.PackageInstallerError
 import app.grapheneos.apps.core.PackageState
-import app.grapheneos.apps.core.startPackageInstall
 import app.grapheneos.apps.core.pkgManager
+import app.grapheneos.apps.core.startPackageInstall
 import app.grapheneos.apps.util.getApplicationInfo
 import app.grapheneos.apps.util.maybeGetParcelable
 import app.grapheneos.apps.util.toInt

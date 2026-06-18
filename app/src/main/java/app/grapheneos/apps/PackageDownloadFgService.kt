@@ -5,9 +5,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.text.format.Formatter
+import app.grapheneos.apps.core.InstallTask
 import app.grapheneos.apps.core.appContext
 import app.grapheneos.apps.core.appResources
-import app.grapheneos.apps.core.InstallTask
 import app.grapheneos.apps.ui.DetailsScreen
 import app.grapheneos.apps.util.checkMainThread
 import app.grapheneos.apps.util.getParcelableExtra

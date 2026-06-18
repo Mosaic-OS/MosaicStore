@@ -2,7 +2,6 @@ package app.grapheneos.apps.core
 
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageInstaller.SessionParams
-import android.os.Build
 import android.util.Log
 import android.util.SparseArray
 import app.grapheneos.apps.BuildConfig

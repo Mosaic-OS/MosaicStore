@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mosaic Store</string>
+
+    <string name="pkg_status_disabled">Kikapcsolva</string>
+    <string name="pkg_status_update_available">Frissítés elérhető (%1$s)</string>
+    <string name="pkg_status_installed">Telepítve</string>
+    <string name="pkg_status_downloading">Letöltés folyamatban: %1$d%%</string>
+    <string name="pkg_status_downloading_update">Frissítés letöltése folyamatban: %1$d%%</string>
+    <string name="pkg_status_pending_download">Letöltés függőben</string>
+    <string name="pkg_status_pending_install">Függőben</string>
+    <string name="pkg_status_installing">Telepítés</string>
+    <string name="pkg_status_unpacking">Kicsomagolás</string>
+    <string name="pkg_status_waiting_for_confirmation">Megerősítésre vár</string>
+    <string name="pkg_status_shared_library">Megosztott könyvtár, %1$s</string>
+
+    <string name="btn_install">Telepítés</string>
+    <string name="btn_open">Megnyitás</string>
+    <string name="btn_update">Frissítés</string>
+    <string name="btn_enable_package">Bekapcsolás</string>
+
+    <string name="menu_item_all_packages">Minden csomag</string>
+    <string name="menu_item_uninstall">Eltávolítás</string>
+    <string name="menu_item_uninstall_updates">Frissítések eltávolítása</string>
+
+    <string name="pkg_installed_version">Telepített verzió</string>
+    <string name="pkg_available_version">Elérhető verzió</string>
+
+    <string name="pkg_description">Leírás</string>
+    <string name="pkg_release_notes">Verzió információk</string>
+    <string name="pkg_dependencies">Függőségek</string>
+
+    <string name="pkg_source_grapheneos">GrapheneOS</string>
+    <string name="pkg_source_grapheneos_build">GrapheneOS build</string>
+    <string name="pkg_source_mirror">Mirror</string>
+    <string name="pkg_source_google">Google (mirror)</string>
+
+    <string name="settings">Beállítások</string>
+    <string name="open_settings">Beállítások megnyitása</string>
+
+    <string name="updates_screen_title">Frissítések</string>
+
+    <plurals name="number_of_updates">
+        <item quantity="one">%d frissítés</item>
+        <item quantity="other">%d frissítés</item>
+    </plurals>
+
+    <string name="no_available_updates">Nincs elérhető frissítés</string>
+
+    <string name="cancel">Mégse</string>
+    <string name="cancelling_download">Letöltés megszakítása</string>
+
+    <string name="dismiss">Elvetés</string>
+
+    <plurals name="cancel_plural">
+        <item quantity="one">Mégse</item>
+        <item quantity="other">Mégse</item>
+    </plurals>
+
+    <plurals name="start_update_button">
+        <item quantity="one">Frissítés</item>
+        <item quantity="other">Összes frissítése</item>
+    </plurals>
+
+    <string name="installation_failed">Sikertelen telepítés</string>
+
+    <string name="search">Keresés</string>
+
+    <string name="release_channel">Kiadócsatorna</string>
+    <string name="release_channel_alpha">Alfa</string>
+    <string name="release_channel_beta">Béta</string>
+    <string name="release_channel_stable">Stabil</string>
+
+    <string name="notif_download_in_progress">Fájlok letöltése, %1$s van hátra</string>
+
+    <string name="notif_title_pending_user_action">Intézkedés szükséges</string>
+    <string name="notif_text_pending_user_action_install">Erősítse meg a %1$s, %2$s verzió telepítését</string>
+    <string name="notif_text_pending_user_action_update">Erősítse meg a %1$s frissítését a %2$s verzióra</string>
+
+    <string name="notif_group_auto_update">Automatikus frissítés</string>
+    <string name="notif_auto_update_all_up_to_date">Az alkalmazások naprakészek</string>
+    <string name="notif_ch_auto_update_updated_packages">Frissített alkalmazások</string>
+    <string name="notif_auto_update_updated_package_title">Frissített alkalmazás</string>
+    <string name="notif_auto_update_updated_package_text">%1$s frissítve a(z) %2$s verzióra</string>
+    <string name="notif_ch_auto_update_confirmation_required">Megerősítés szükséges</string>
+    <string name="notif_ch_auto_update_failed">Az automatikus frissítés nem sikerült</string>
+    <string name="notif_ch_background_update_check_failed">A háttérfrissítés ellenőrzése sikertelen</string>
+    <string name="notif_ch_updates_available">Frissítések elérhetők</string>
+
+    <string name="notif_pkg_update_available_text">%1$s, verzió %2$s</string>
+    <plurals name="notif_pkg_updates_available_title">
+        <item quantity="one">Frissítés elérhető, %1$s</item>
+        <item quantity="other">Frissítések elérhetőek, %1$s</item>
+    </plurals>
+
+    <string name="notif_ch_downloading_app">Alkalmazás letöltése</string>
+    <string name="notif_missing_dependency">Hiányzó függőség</string>
+    <string name="notif_installation_failed">Sikertelen telepítés</string>
+    <string name="notif_download_failed">Sikertelen letöltés</string>
+
+    <string name="unable_to_fetch_app_list">Nem sikerült lekérni az alkalmazások listáját</string>
+    <string name="app_update_check_failed">Az alkalmazásfrissítés ellenőrzése sikertelen</string>
+
+    <string name="main_screen_unable_to_fetch_app_list_initial">Nem sikerült lekérni az alkalmazások listáját, csúsztassa lefelé az ujját az újbóli próbálkozáshoz.</string>
+
+    <string name="uninstall_failed">Sikertelen eltávolítás</string>
+
+    <string name="msg_unable_to_download_pkg">A(z) %1$s letöltése sikertelen</string>
+    <string name="msg_unable_to_install_pkg">A(z) %1$s telepítése sikertelen</string>
+    <string name="msg_unable_to_uninstall_pkg">A(z) %1$s eltávolítása nem sikerült</string>
+
+    <string name="error_details_prefix">"Részletek:  "</string>
+    <string name="snackbar_action_details">Részletek</string>
+
+    <string name="err_title_missing_dependency">Hiányzó függőség</string>
+    <string name="err_msg_dependency_resolution_dep_missing_in_repo">A(z) %1$s a %2$s-tól függ, ami hiányzik az elérhető csomagok listájáról.</string>
+    <string name="err_msg_dependency_resolution_dep_disabled">A(z) %1$s a %2$s-tól függ, amely le van tiltva.</string>
+    <string name="err_msg_dependency_resolution_dep_not_installed">A(z) %1$s a %2$s-tól függ, amely nincs telepítve.</string>
+
+    <string name="download_error_user_restriction">Az eszközre vonatkozó házirend megakadályozza az alkalmazás telepítését</string>
+    <plurals name="download_error_packages_busy">
+        <item quantity="one">ezt a csomagot egy másik felhasználó éppen telepíti</item>
+        <item quantity="other">egy vagy több ilyen csomag telepítése folyamatban van egy másik felhasználónál</item>
+    </plurals>
+
+    <string name="network_error_unable_to_connect_to_server">Nem lehet csatlakozni a szerverhez</string>
+    <string name="network_error_connection_timed_out">A szerverrel való kapcsolat időtúllépés miatt megszakadt</string>
+    <string name="network_error_unknown_host_name">Nem sikerült feloldani a szerver nevét</string>
+
+    <string name="installer_error_conflict">A csomag ütközik egy másik csomaggal, amely már telepítve van erre az eszközre</string>
+    <string name="installer_error_version_downgrade">A csomag újabb verziója már telepítve van ezen az eszközön</string>
+    <string name="installer_error_insufficient_storage">Nincs elég tárhely</string>
+
+    <string name="err_msg_uninstall_restricted">Nem távolíthatja el ezt a csomagot</string>
+
+    <string name="err_title_pkg_is_installing">A csomag jelenleg telepítés alatt</string>
+    <string name="err_title_dep_is_installing">A függőség telepítése folyamatban</string>
+    <string name="err_msg_pkg_is_installing">%1$s jelenleg telepítés alatt van. Próbálja újra a telepítés befejezése után.</string>
+
+    <string name="btn_copy">Másolás</string>
+
+    <string name="notification_permission_dialog_title">Hiányzó értesítési engedély</string>
+    <string name="notification_permission_dialog_message">Engedélyezze az értesítési engedélyt, hogy értesítést kapjon az alkalmazásfrissítésekről, a letöltési és telepítési állapotról.</string>
+
+    <string name="dont_show_again">Ne mutasd újra</string>
+
+    <!-- Új stringek -->
+    <string name="new_window">Új ablak</string>
+
+</resources>

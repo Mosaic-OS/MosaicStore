@@ -9,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.MenuRes
 import androidx.core.view.MenuProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnPreDraw
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController

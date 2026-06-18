@@ -7,10 +7,10 @@ import android.provider.Settings
 import android.text.Html
 import androidx.core.content.edit
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import app.grapheneos.apps.R
 import app.grapheneos.apps.core.selfPkgName
 import app.grapheneos.apps.util.InternalSettings
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NotificationPermissionDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

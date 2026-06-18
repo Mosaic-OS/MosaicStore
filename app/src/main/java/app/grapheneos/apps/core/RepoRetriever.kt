@@ -1,5 +1,6 @@
-package app.grapheneos.apps.core;
+package app.grapheneos.apps.core
 
+import android.util.Log
 import app.grapheneos.apps.BuildConfig
 import app.grapheneos.apps.util.AtomicFile2
 import app.grapheneos.apps.util.openConnection
@@ -48,7 +49,7 @@ fun fetchRepo(currentRepo: Repo): Repo {
             }
         }
     } else {
-        openConnection(null, url, {}).use { conn ->
+        openConnection(null, url) {}.use { conn ->
             if (conn.v.responseCode != HTTP_OK) {
                 throwResponseCodeException(conn.v)
             }
@@ -71,6 +72,12 @@ private fun fetchInner(conn: HttpURLConnection, minTimestamp: Long): Repo {
     // 100 bytes of base64 encoded signature (its real size is 74 bytes)
     // 1 byte of newline
 
+    // Guard against a too-short/empty body (e.g. an error page from the repo server) so the
+    // slicing below can't throw IndexOutOfBoundsException on a negative range.
+    if (unverifiedBytes.size < 102) {
+        throw GeneralSecurityException("repo metadata response too short: ${unverifiedBytes.size} bytes")
+    }
+
     val unverifiedJson: ByteArray = unverifiedBytes.copyOfRange(0, unverifiedBytes.size - 102)
     val signature: String =
         unverifiedBytes.copyOfRange(unverifiedBytes.size - 101, unverifiedBytes.size - 1)
@@ -78,19 +85,17 @@ private fun fetchInner(conn: HttpURLConnection, minTimestamp: Long): Repo {
 
     FileVerifier(PUBLIC_KEY).verifySignature(unverifiedJson, signature)
 
-    val verifiedJson = unverifiedJson
-
-    val repo = Repo(JSONObject(verifiedJson.toString(UTF_8)), eTag)
+    val repo = Repo(JSONObject(unverifiedJson.toString(UTF_8)), eTag)
 
     if (repo.timestamp < minTimestamp) {
         throw GeneralSecurityException("repo downgrade")
     }
 
-    val baos = ByteArrayOutputStream(verifiedJson.size + 100)
+    val baos = ByteArrayOutputStream(unverifiedJson.size + 100)
     DataOutputStream(baos).let {
         it.writeInt(CACHE_FILE_VERSION)
         it.writeString(eTag)
-        it.writeByteArray(verifiedJson)
+        it.writeByteArray(unverifiedJson)
     }
 
     cacheFile.write(baos.toByteArray())
@@ -101,16 +106,22 @@ private fun fetchInner(conn: HttpURLConnection, minTimestamp: Long): Repo {
 fun getCachedRepo(): Repo {
     val bytes = cacheFile.read() ?: return createDummy()
 
-    val dis = DataInputStream(ByteArrayInputStream(bytes))
-    val fileVersion = dis.readInt()
-    check(fileVersion <= CACHE_FILE_VERSION)
+    return try {
+        val dis = DataInputStream(ByteArrayInputStream(bytes))
+        val fileVersion = dis.readInt()
+        check(fileVersion <= CACHE_FILE_VERSION)
 
-    val eTag = dis.readString()
+        val eTag = dis.readString()
 
-    val json = dis.readByteArray().toString(UTF_8)
-    check(dis.available() == 0)
+        val json = dis.readByteArray().toString(UTF_8)
+        check(dis.available() == 0)
 
-    return Repo(JSONObject(json), eTag)
+        Repo(JSONObject(json), eTag)
+    } catch (e: Exception) {
+        // A corrupt/incompatible cache must not become a fatal init error at startup.
+        Log.e("RepoRetriever", "failed to read cached repo, falling back to dummy", e)
+        createDummy()
+    }
 }
 
 // make a dummy repo to remove the need to check for null Repo everywhere

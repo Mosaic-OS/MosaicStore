@@ -1,11 +1,11 @@
 package app.grapheneos.apps.util
 
 import android.net.Network
+import org.grapheneos.tls.ModernTLSSocketFactory
 import java.net.HttpURLConnection
 import java.net.ProtocolException
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
-import org.grapheneos.tls.ModernTLSSocketFactory
 
 private val tlsSocketFactory = ModernTLSSocketFactory()
 

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageInstaller
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -20,16 +19,16 @@ import app.grapheneos.apps.show
 import app.grapheneos.apps.ui.DetailsScreen
 import app.grapheneos.apps.ui.ErrorDialog
 import app.grapheneos.apps.util.ActivityUtils
-import app.grapheneos.apps.util.getNumber
-import app.grapheneos.apps.util.getParcelableOrThrow
-import app.grapheneos.apps.util.intent
-import kotlinx.parcelize.Parcelize
 import app.grapheneos.apps.util.PendingActivityIntent
 import app.grapheneos.apps.util.className
+import app.grapheneos.apps.util.getNumber
 import app.grapheneos.apps.util.getParcelable2
+import app.grapheneos.apps.util.getParcelableOrThrow
+import app.grapheneos.apps.util.intent
 import app.grapheneos.apps.util.maybeGetNumber
 import app.grapheneos.apps.util.putParcelable2
 import kotlinx.coroutines.channels.Channel
+import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
 class PkgInstallerStatusReceiver: BroadcastReceiver() {
