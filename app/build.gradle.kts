@@ -34,34 +34,43 @@ android {
         }
     }
 
-    compileSdk = 36
-    buildToolsVersion = "36.1.0"
+    compileSdk = 37
+    buildToolsVersion = "37.0.0"
 
     namespace = "app.grapheneos.apps"
 
     defaultConfig {
         applicationId = "apps.mosaicos.io"
         minSdk = 31
-        targetSdk = 36
-        versionCode = 6
+        targetSdk = 37
+        versionCode = 7
         versionName = versionCode.toString()
 
-        buildConfigField(String::class.java.name, "REPO_BASE_URL",
-            "\"${System.getenv("REPO_BASE_URL") ?: "https://appstore.mosaicos.io"}\"")
+        buildConfigField(
+            String::class.java.name, "REPO_BASE_URL",
+            "\"${System.getenv("REPO_BASE_URL") ?: "https://appstore.mosaicos.io"}\""
+        )
 
-        buildConfigField(String::class.java.name, "REPO_PUBLIC_KEY", "\"${
-            System.getenv("REPO_PUBLIC_KEY") ?: "RWTnV7mEvJhA9c+8DeH/O8QDSGrJ/B0M5UcJnqKO8z57/y7PE7PNOY8o"
-        }\"")
+        buildConfigField(
+            String::class.java.name, "REPO_PUBLIC_KEY", "\"${
+                System.getenv("REPO_PUBLIC_KEY") ?: "RWTnV7mEvJhA9c+8DeH/O8QDSGrJ/B0M5UcJnqKO8z57/y7PE7PNOY8o"
+            }\""
+        )
 
-        buildConfigField(String::class.java.name, "REPO_KEY_VERSION",
-            "\"${System.getenv("REPO_KEY_VERSION") ?: "0"}\"")
+        buildConfigField(
+            String::class.java.name, "REPO_KEY_VERSION",
+            "\"${System.getenv("REPO_KEY_VERSION") ?: "0"}\""
+        )
     }
 
     buildTypes {
         getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             if (useKeystoreProperties) {
                 signingConfig = signingConfigs.getByName("release")
             }
@@ -82,11 +91,13 @@ android {
     }
 
     packaging {
-        resources.excludes.addAll(listOf(
-            "META-INF/versions/*/OSGI-INF/MANIFEST.MF",
-            "org/bouncycastle/pqc/**.properties",
-            "org/bouncycastle/x509/**.properties",
-        ))
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/versions/*/OSGI-INF/MANIFEST.MF",
+                "org/bouncycastle/pqc/**.properties",
+                "org/bouncycastle/x509/**.properties",
+            )
+        )
     }
 }
 
