@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2026 The MosaicOS Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+    <string name="models_title">Offline modellek kezelése</string>
+    <string name="models_intro">Timty segítsége opcionális, de modell nélkül nem működik. Töltse le az ajánlott modellt a gépelt és kimondott kérdésekhez, valamint az opcionális angol beszédfelismerő modellt, vagy importálja az alább látható fájlokat. A MosaicAssistant megnyitása nem indít automatikus letöltést. Az asszisztens további tárhelyet használ a gyorsabb válaszadás érdekében.</string>
+    <string name="models_recommended">(ajánlott)</string>
+    <string name="models_in_use">Aktuális modell</string>
+    <string name="models_chat_choice">Beállítás aktuális modellként</string>
+    <string name="models_chat_choice_description">A(z) %1$s használata aktuális modellként</string>
+    <string name="models_selection_failed">Nem sikerült módosítani az aktuális modellt. Próbálja újra.</string>
+    <string name="models_import">Modellfájl importálása</string>
+    <string name="models_import_bundled">Mellékelt modell importálása</string>
+    <string name="models_delete">Modell törlése</string>
+    <string name="models_deleted">Modell törölve</string>
+    <string name="models_delete_failed">Nem sikerült törölni a modellt. Próbálja újra az asszisztens leállítása után.</string>
+    <string name="models_import_done">Offline modell használatra kész</string>
+    <string name="models_import_failed">A letöltés vagy importálás megszakadt vagy sikertelen volt. Ellenőrizze a kapcsolatot, a szabad tárhelyet és a kiválasztott fájlt. A korábban telepített modellek megmaradnak.</string>
+    <string name="models_absent">Nincs telepítve</string>
+    <string name="models_downloading">Letöltés folyamatban</string>
+    <string name="models_verifying">Ellenőrzés folyamatban</string>
+    <string name="models_incompatible">A modell nem kompatibilis ezzel az eszközzel.</string>
+    <string name="models_corrupt">A modell nem használható biztonságosan. Töltse le vagy importálja újra.</string>
+    <string name="models_ready">Kész</string>
+    <string name="models_importing">Importálás</string>
+    <string name="models_removing">Az asszisztens leállítása és a modell eltávolítása</string>
+    <string name="models_unavailable">A modelltároló nem érhető el</string>
+    <string name="models_operation">Offline modellművelet folyamatban</string>
+    <string name="models_download">Letöltés</string>
+    <string name="models_resume">Letöltés folytatása</string>
+    <string name="models_pause">Szüneteltetés</string>
+    <string name="models_paused">Szüneteltetve</string>
+    <string name="models_partial_kept">A letöltés szüneteltetve vagy megszakítva. A folytatáshoz válassza a folytatást, vagy a törléshez a Mégse lehetőséget.</string>
+    <string name="models_cancelled">Letöltés megszakítva.</string>
+    <string name="models_cleanup_failed">Nem sikerült elvetni a befejezetlen letöltést. Próbálja meg újra a Mégse vagy a Modell törlése műveletet.</string>
+    <string name="models_free">Elérhető tárhely: %1$s</string>
+    <string name="models_allocation">Felhasznált modelltárhely: %1$s</string>
+	<string name="models_expected">Várt importfájl: %1$s\nMéret: %2$s (%3$d bájt)</string>
+    <string name="models_smaller_capable">Ez az eszköz képes futtatni a nagyobb, 4B-s modellt is, amely jobb válaszokat ad.</string>
+    <string name="models_larger_not_rated">Ez az eszköz nincs minősítve a 4B-s modellhez. A modell futtatása nagyon lassú lehet.</string>
+    <string name="models_oversized_title">Telepíti a 4B-s modellt?</string>
+    <string name="models_oversized_warning">A 4B-s modell nem ehhez a hardverhez készült, és nagyon lassú válaszadást eredményezhet. Folytatja a telepítést?</string>
+    <string name="models_continue">Folytatás</string>
+    <string name="models_download_consent">Letölti a következőt: %1$s (%2$d bájt)?\n\nForrás és engedélyezett kiszolgáló gazdagépek: %3$s. Ezek láthatják az IP-címét és a kért fájlt. A rendszer nem küld fiókadatokat, sütiket, eszközazonosítót vagy asszisztens-tartalmat. A beállított VPN-nek vagy Tor VPN-nek tartalmaznia kell a MosaicStore-t az adatátvitel biztosításához.</string>
+    <string name="models_metered">A jelenlegi kapcsolat korlátozott adatforgalmú vagy nem érhető el. Engedélyezi a korlátozott adatforgalmú kapcsolat használatát ehhez az átvitelhez? Az engedély a kapcsolat megszűnésével lejár, folytatáskor a rendszer szükség esetén újra rákérdez.</string>
+    <string name="models_allow_metered">Korlátozott adatforgalmú letöltés engedélyezése</string>
+    <string name="models_delete_consent">Leállítja az asszisztenst, és törli ezt a modellt, valamint a hozzá tartozó mentett adatokat? Az eredeti forrásfájlok megmaradnak.</string>
+</resources>

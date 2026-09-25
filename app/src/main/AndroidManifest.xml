@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SETUP_FSVERITY" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -26,6 +27,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Apps.DayNight"
         android:memtagMode="async">
+
+        <provider android:name=".models.ModelSettingsProvider"
+            android:authorities="${applicationId}.model-settings" android:exported="false" />
+        <activity android:name=".models.OfflineModelsActivity"
+            android:excludeFromRecents="true" android:exported="true" android:process=":models" />
+        <service android:name=".models.ModelStoreService"
+            android:exported="true" android:process=":models"
+            android:permission="apps.mosaicos.timty.permission.READ_MODELS" />
+        <service android:name=".models.ModelImportService"
+            android:exported="false" android:process=":models"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="User initiated offline model transfer, integrity verification and removal" />
+        </service>
 
         <activity
             android:name=".ui.MainActivity"

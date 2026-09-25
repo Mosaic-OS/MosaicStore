@@ -34,6 +34,13 @@ android {
         }
     }
 
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
+
     compileSdk = 37
     buildToolsVersion = "37.0.0"
 
@@ -43,7 +50,7 @@ android {
         applicationId = "apps.mosaicos.io"
         minSdk = 31
         targetSdk = 37
-        versionCode = 7
+        versionCode = 8
         versionName = versionCode.toString()
 
         buildConfigField(
@@ -82,6 +89,7 @@ android {
     }
 
     buildFeatures {
+        aidl = true
         viewBinding = true
         buildConfig = true
     }

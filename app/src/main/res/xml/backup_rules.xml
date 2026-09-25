@@ -13,4 +13,8 @@
             path="app_channel" />
 
     </cloud-backup>
+    <device-transfer>
+        <include domain="sharedpref" path="seamlessUpdate" />
+        <include domain="sharedpref" path="app_channel" />
+    </device-transfer>
 </data-extraction-rules>

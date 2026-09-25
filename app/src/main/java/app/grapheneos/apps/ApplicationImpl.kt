@@ -38,6 +38,7 @@ class ApplicationImpl : Application(), ActivityLifecycleCallbacks {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         baseAppContext = base
+        if (Application.getProcessName().endsWith(":models")) return
 
         PackageStates.requestRepoUpdateNoSuspend()
         PackageStates.init()
@@ -54,7 +55,7 @@ class ApplicationImpl : Application(), ActivityLifecycleCallbacks {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        PackageStates.onResourceConfigChanged()
+        if (!Application.getProcessName().endsWith(":models")) PackageStates.onResourceConfigChanged()
     }
 
     override fun onActivityResumed(activity: Activity) {

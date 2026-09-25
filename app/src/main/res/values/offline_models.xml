@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2026 The MosaicOS Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+    <string name="models_title">Manage offline models</string>
+    <string name="models_intro">Timty\'s assistance is optional, but it does not work without a model. Download the recommended model for typed and spoken questions and the optional English speech model, or import the files shown below. Opening Timty never starts a download. The assistant uses additional storage to respond faster.</string>
+    <string name="models_recommended">(recommended)</string>
+    <string name="models_in_use">Current model</string>
+    <string name="models_chat_choice">Use as current model</string>
+    <string name="models_chat_choice_description">Use %1$s as the current model</string>
+    <string name="models_selection_failed">Could not change the current model. Try again.</string>
+    <string name="models_import">Import model file</string>
+    <string name="models_import_bundled">Import included model</string>
+    <string name="models_delete">Delete model</string>
+    <string name="models_deleted">Model deleted</string>
+    <string name="models_delete_failed">Could not delete the model. Try again after stopping the assistant.</string>
+    <string name="models_import_done">Offline model ready to use</string>
+    <string name="models_import_failed">Download or import cancelled or failed. Check your connection, free space and selected file. Previously installed models are kept.</string>
+    <string name="models_absent">Not installed</string>
+    <string name="models_downloading">Downloading</string>
+    <string name="models_verifying">Verifying</string>
+    <string name="models_incompatible">Model is not compatible with this device.</string>
+    <string name="models_corrupt">Model could not be used safely. Download or import it again.</string>
+    <string name="models_ready">Ready</string>
+    <string name="models_importing">Importing</string>
+    <string name="models_removing">Stopping the assistant and removing model</string>
+    <string name="models_unavailable">Model storage unavailable</string>
+    <string name="models_operation">Offline model operation in progress</string>
+    <string name="models_download">Download</string>
+    <string name="models_resume">Resume download</string>
+    <string name="models_pause">Pause</string>
+    <string name="models_paused">Paused</string>
+    <string name="models_partial_kept">Download paused or interrupted. Resume to continue, or Cancel to discard it.</string>
+    <string name="models_cancelled">Download cancelled.</string>
+    <string name="models_cleanup_failed">Could not discard the unfinished download. Try Cancel or Delete model again.</string>
+    <string name="models_free">Available storage: %1$s</string>
+    <string name="models_allocation">Model storage used: %1$s</string>
+    <string name="models_progress">%1$s %2$s</string>
+    <string name="models_expected">Expected import file: %1$s\nSize: %2$s (%3$d bytes)</string>
+    <string name="models_chat_2b">Qwen 3.5 2B</string>
+    <string name="models_chat_4b">Qwen 3.5 4B</string>
+    <string name="models_speech">Whisper Base English</string>
+    <string name="models_smaller_capable">This device can also run the larger 4B model, which gives better answers.</string>
+    <string name="models_larger_not_rated">This device is not rated for the 4B model. It may run very slowly.</string>
+    <string name="models_oversized_title">Install the 4B model?</string>
+    <string name="models_oversized_warning">The 4B model is not meant for this hardware and may run very slowly. Continue installing it?</string>
+    <string name="models_continue">Continue</string>
+    <string name="models_download_consent">Download %1$s (%2$d bytes)?\n\nSource and allowed delivery hosts: %3$s. They can see your IP address and requested file. No account, cookies, device identifier or assistant content is sent. Your configured VPN or Tor VPN must include MosaicStore to cover this transfer.</string>
+    <string name="models_metered">The current connection is metered or unavailable. Allow metered data for this transfer? Consent expires when it stops, resume asks again if needed.</string>
+    <string name="models_allow_metered">Allow metered download</string>
+    <string name="models_delete_consent">Stop the assistant and delete this model and its saved data? Original source files are kept.</string>
+</resources>

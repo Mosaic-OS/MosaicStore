@@ -11,7 +11,7 @@
 
     <string name="pref_key_background_update_check_interval" translatable="false">rescheduleTiming</string>
 <!--    in milliseconds, leftover from the initial version-->
-    <string name="pref_def_background_update_check_interval">21600000</string>
+    <string name="pref_def_background_update_check_interval" translatable="false">21600000</string>
 
     <string-array name="pref_values_background_update_check_interval">
         <item>3600000</item>

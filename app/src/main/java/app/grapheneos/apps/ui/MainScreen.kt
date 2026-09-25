@@ -144,6 +144,10 @@ open class MainScreen : PackageListFragment<MainScreenBinding>(), MenuProvider {
     private lateinit var newWindowMenuItem: MenuItem
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == R.id.offline_models) {
+            startActivity(Intent(requireContext(), app.grapheneos.apps.models.OfflineModelsActivity::class.java))
+            return true
+        }
         if (BuildConfig.DEBUG) {
             if (newWindowMenuItem === menuItem) {
                 val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
