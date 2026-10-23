@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 The MosaicOS Project; SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="models_voice_output_hungarian">Magyar felolvasó hang</string>
+    <string name="models_voice_anna">Anna - a Tabiti magyar felolvasó hangja</string>
+    <string name="models_voice_anna_detail">
+        A Tabiti beépített magyar felolvasó hangja. A Tabiti ezt részesíti előnyben, ha használatra kész. Más
+        alkalmazásokban a Tabitit választva beszédmotorként használhatja
+    </string>
+    <string name="models_voice_output_unavailable">
+        A magyar felolvasó hang nem érhető el a rendszer jelenlegi katalógusában.
+    </string>
+</resources>

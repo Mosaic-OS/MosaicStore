@@ -38,4 +38,7 @@ interface IModelStore {
     void setSelectedChatModelId(String modelId);
     void registerChatModelListener(IChatModelListener listener);
     void unregisterChatModelListener(IChatModelListener listener);
+    @nullable String getSelectedSpeechModelId();
+    void setSelectedSpeechModelId(String modelId);
+    @nullable String getSelectedSpeechModelIdForLanguage(String language);
 }

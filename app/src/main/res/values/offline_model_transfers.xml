@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="models_preparing">
+        Preparing offline models
+    </string>
+    <string name="models_network_paused">
+        Download paused because the network is unavailable. Your downloaded data has been kept. You can resume
+        later.
+    </string>
+    <string name="models_space_paused">
+        Download paused because storage space is low. Your downloaded data has been kept. Free up space to resume.
+    </string>
+    <string name="models_publish_pending">
+        The verified model has been kept. It will become available when the current use ends.
+    </string>
+</resources>

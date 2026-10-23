@@ -65,7 +65,17 @@ class OfflineModelsActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.models_content, OfflineModelsFragment())
+                .replace(R.id.models_content, OfflineModelsFragment().apply {
+                    val language = RecommendedModels.language(
+                        intent.getStringExtra(RecommendedModels.EXTRA_LANGUAGE),
+                        this@OfflineModelsActivity.resources.configuration.locales[0].language,
+                    )
+                    arguments = Bundle().apply {
+                        putString(RecommendedModels.EXTRA_CHOICE,
+                            language?.let { intent.getStringExtra(RecommendedModels.EXTRA_CHOICE) })
+                        putString(RecommendedModels.EXTRA_LANGUAGE, language)
+                    }
+                })
                 .commit()
         }
     }

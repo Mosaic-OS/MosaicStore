@@ -22,26 +22,32 @@ import android.net.Uri
 import android.os.Binder
 import android.os.Bundle
 import android.os.Process
-import app.grapheneos.apps.R
-import app.grapheneos.apps.util.getSharedPreferences
+import app.mosaicos.models.SpeechModels
 
-// SharedPreferences writes must stay in the main process to preserve other Store settings
 class ModelSettingsProvider : ContentProvider() {
     override fun onCreate() = true
 
+    @Synchronized
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle {
         check(Binder.getCallingUid() == Process.myUid())
-        val preferences = getSharedPreferences(R.string.pref_file_settings)
+        val repository = ModelRepository.get(checkNotNull(context))
+        val language = extras?.getString("language")
         when (method) {
-            "getChatModel" -> Unit
-            "setChatModel" -> {
-                require(arg in setOf("chat-2b", "chat-4b"))
-                check(preferences.edit().putString(KEY_SELECTED_CHAT_MODEL, arg).commit())
-            }
+            "getChatModel", "getSpeechModel" -> Unit
+            "getSpeechModelForLanguage" -> require(language == "en" || language == "hu")
+            "removeRetiredSpeech" -> repository.removeRetiredSelections()
+            "setSpeechModel" -> repository.selectSpeechModel(checkNotNull(arg))
+            "setChatModel" -> repository.selectChatModel(checkNotNull(arg))
             else -> throw IllegalArgumentException("Unknown model setting")
         }
         return Bundle().apply {
-            putString(KEY_SELECTED_CHAT_MODEL, preferences.getString(KEY_SELECTED_CHAT_MODEL, null))
+            putString(KEY_SELECTED_CHAT_MODEL, repository.chatPreference())
+            val key = if (language == "en") SelectionMigration.speechKey(language)
+                else SelectionMigration.SPEECH
+            val selected = repository.speechPreference(key)
+            putString(KEY_SELECTED_SPEECH_MODEL, selected?.takeIf {
+                SpeechModels.language(it) != null && (language == null || SpeechModels.language(it) == language)
+            })
         }
     }
 
@@ -55,5 +61,7 @@ class ModelSettingsProvider : ContentProvider() {
 
     internal companion object {
         const val KEY_SELECTED_CHAT_MODEL = "selected_chat_model"
+        const val KEY_SELECTED_SPEECH_MODEL = "selected_speech_model"
+        const val KEY_SELECTED_SPEECH_EN = "selected_speech_en"
     }
 }

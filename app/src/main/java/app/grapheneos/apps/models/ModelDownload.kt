@@ -20,22 +20,17 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import android.os.SystemClock
 import app.mosaicos.models.ModelCatalog
 import app.mosaicos.models.ModelSpec
 import java.io.IOException
 import java.io.InputStream
 import java.net.Authenticator
 import java.net.CookieHandler
-import java.net.ProtocolException
 import java.net.ResponseCache
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HttpsURLConnection
-import javax.net.ssl.SSLException
-
-internal class ModelTransferStopped(val keepPartial: Boolean) : IOException()
-internal class ModelDownloadUnavailable : IOException()
-private class RejectedDownload : IOException()
 
 internal class ModelDownload(
     context: Context,
@@ -49,15 +44,42 @@ internal class ModelDownload(
         ?: error("Network service unavailable")
     @Volatile private var connection: HttpsURLConnection? = null
     private var input: InputStream? = null
-    private var retries = 0
+    private val retries = TransferRetries()
+    private var bodyValidated = false
+    @Volatile private var networkAvailable = false
+    @Volatile private var networkMetered = true
+    @Volatile private var recoveringNetwork = false
+    @Volatile private var networkReported = false
+    @Volatile private var activeNetwork: Network? = null
     @Volatile private var closed = false
     private val cancellation = Executors.newSingleThreadScheduledExecutor()
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
+        override fun onAvailable(network: Network) {
+            if (activeNetwork != null && activeNetwork != network) recoveringNetwork = true
+            networkAvailable = false
+            networkMetered = true
+            activeNetwork = network
+        }
+
         override fun onCapabilitiesChanged(network: Network, capabilities: NetworkCapabilities) {
-            if (!closed && !allowMetered && !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
-                pause()
+            if (network != activeNetwork) return
+            networkMetered = !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
+            networkAvailable = capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+            networkReported = true
+            if (!networkAvailable) recoveringNetwork = true
+            if (!closed && (!networkAvailable || !allowMetered && networkMetered)) {
                 runCatching { connection?.disconnect() }
             }
+        }
+
+        override fun onLost(network: Network) {
+            if (network != activeNetwork) return
+            recoveringNetwork = true
+            networkAvailable = false
+            activeNetwork = null
+            networkReported = true
+            if (!closed) runCatching { connection?.disconnect() }
         }
     }
 
@@ -82,9 +104,33 @@ internal class ModelDownload(
         checkpoint()
         check(!closed)
         check(connectivity.boundNetworkForProcess == null)
-        if (!allowMetered && connectivity.isActiveNetworkMetered) {
-            pause()
-            checkpoint()
+    }
+
+    private fun awaitNetwork() {
+        val started = SystemClock.elapsedRealtime()
+        val deadline = started + TransferPolicy.NETWORK_WAIT_MS
+        var waitingForNetwork = recoveringNetwork
+        while (true) {
+            guard()
+            // The default-network callback is asynchronous, so a missing first report is not a lost network.
+            val reported = networkReported ||
+                SystemClock.elapsedRealtime() - started >= TransferPolicy.FIRST_REPORT_MS
+            if (networkAvailable) {
+                if (allowMetered || !networkMetered) {
+                    recoveringNetwork = false
+                    return
+                }
+                if (!waitingForNetwork) {
+                    pause()
+                    checkpoint()
+                    throw ModelDownloadUnavailable()
+                }
+            } else if (reported) {
+                waitingForNetwork = true
+                recoveringNetwork = true
+            }
+            if (SystemClock.elapsedRealtime() >= deadline) throw ModelDownloadUnavailable()
+            Thread.sleep(if (reported) 250 else 20)
         }
     }
 
@@ -96,10 +142,12 @@ internal class ModelDownload(
     }
 
     private fun connect() {
+        bodyValidated = false
+        awaitNetwork()
         var uri = ModelCatalog.sourceUri(entry.sourceUrl)
         val hosts = entry.redirectHosts + uri.host
         for (hop in 0..3) {
-            guard()
+            awaitNetwork()
             check(CookieHandler.getDefault() == null && ResponseCache.getDefault() == null)
             val current = uri.toURL().openConnection() as HttpsURLConnection
             connection = current
@@ -114,7 +162,7 @@ internal class ModelDownload(
             current.setRequestProperty("Cache-Control", "no-store")
             current.setRequestProperty("Connection", "close")
             if (offset > 0) current.setRequestProperty("Range", "bytes=$offset-")
-            guard()
+            awaitNetwork()
             val code = current.responseCode
             guard()
             if (code in setOf(301, 302, 303, 307, 308)) {
@@ -138,6 +186,7 @@ internal class ModelDownload(
             val length = header(current, "Content-Length")
             if (length != null && (length.toLongOrNull() != entry.size - offset ||
                     header(current, "Transfer-Encoding") != null)) throw RejectedDownload()
+            bodyValidated = true
             input = current.inputStream
             return
         }
@@ -161,21 +210,23 @@ internal class ModelDownload(
                 }
                 val count = input!!.read(buffer, start, minOf(length.toLong(), entry.size - offset + 1).toInt())
                 guard()
+                if (!networkAvailable || !allowMetered && networkMetered) throw IOException()
                 if (count < 0) {
                     if (offset == entry.size) return -1
                     throw IOException()
                 }
-                if (count == 0 || count.toLong() > entry.size - offset) throw RejectedDownload()
+                if (count == 0) throw IOException()
+                if (count.toLong() > entry.size - offset) throw RejectedDownload()
                 offset += count
+                retries.progressed()
                 return count
             } catch (failure: IOException) {
                 disconnect()
                 checkpoint()
-                if (failure is RejectedDownload || failure is SSLException || failure is ProtocolException) {
-                    throw RejectedDownload()
-                }
-                if (retries == 3) throw ModelDownloadUnavailable()
-                val delay = 1_000L shl retries++
+                if (failure is ModelDownloadUnavailable) throw failure
+                if (TransferPolicy.rejected(failure, bodyValidated)) throw RejectedDownload()
+                awaitNetwork()
+                val delay = retries.nextDelay() ?: throw ModelDownloadUnavailable()
                 repeat((delay / 100).toInt()) {
                     guard()
                     Thread.sleep(100)

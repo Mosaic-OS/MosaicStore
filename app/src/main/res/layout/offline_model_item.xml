@@ -22,6 +22,13 @@
             tools:text="Chat model (2B)" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/model_size"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/model_detail"
             style="@style/TextAppearance.Material3.BodySmall"
             android:layout_width="match_parent"
@@ -64,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:max="1000"
+            android:visibility="gone"
             app:trackCornerRadius="2dp"
             tools:progress="400" />
 
@@ -75,63 +83,102 @@
             android:layout_marginTop="8dp"
             tools:text="Downloading — 512 MB of 1.25 GB" />
 
-        <LinearLayout
-            android:id="@+id/model_actions"
+        <app.grapheneos.apps.models.ModelActionsLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="8dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/model_download"
-                style="?attr/materialButtonStyle"
+            <app.grapheneos.apps.models.ModelActionGroup
+                android:id="@+id/model_secondary_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/models_download" />
+                android:gravity="start">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/model_pause"
-                style="?attr/materialButtonOutlinedStyle"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/model_import"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="48dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:singleLine="false"
+                    android:ellipsize="none"
+                    android:text="@string/models_import" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/model_import_bundled"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="48dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:singleLine="false"
+                    android:ellipsize="none"
+                    android:text="@string/models_import_bundled" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/model_delete"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="48dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:singleLine="false"
+                    android:ellipsize="none"
+                    android:text="@string/models_delete" />
+            </app.grapheneos.apps.models.ModelActionGroup>
+
+            <app.grapheneos.apps.models.ModelActionGroup
+                android:id="@+id/model_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/models_pause" />
+                android:gravity="end">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/model_cancel"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@android:string/cancel" />
-        </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/model_download"
+                    style="?attr/materialButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="120dp"
+                    android:minHeight="48dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:singleLine="false"
+                    android:ellipsize="none"
+                    android:text="@string/models_download" />
 
-        <LinearLayout
-            android:id="@+id/model_secondary_actions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/model_pause"
+                    style="?attr/materialButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="120dp"
+                    android:minHeight="48dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:singleLine="false"
+                    android:ellipsize="none"
+                    android:text="@string/models_pause" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/model_import"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/models_import" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/model_import_bundled"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/models_import_bundled" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/model_delete"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/models_delete" />
-        </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/model_cancel"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="48dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:singleLine="false"
+                    android:ellipsize="none"
+                    android:text="@android:string/cancel" />
+            </app.grapheneos.apps.models.ModelActionGroup>
+        </app.grapheneos.apps.models.ModelActionsLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

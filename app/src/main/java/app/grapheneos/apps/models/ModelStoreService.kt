@@ -17,6 +17,9 @@ package app.grapheneos.apps.models
 
 import android.app.Service
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Binder
 import android.os.IBinder
@@ -28,11 +31,41 @@ import app.mosaicos.models.IModelStore
 class ModelStoreService : Service() {
     private val repository by lazy { ModelRepository.get(this) }
 
-    private fun checkCaller() {
+    private val callerLock = Any()
+    private var verifiedUid: Int? = null
+    private val packageChanges = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.data?.schemeSpecificPart == "apps.mosaicos.tabiti") {
+                synchronized(callerLock) { verifiedUid = null }
+            }
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        val filter = IntentFilter().apply {
+            addAction(Intent.ACTION_PACKAGE_ADDED)
+            addAction(Intent.ACTION_PACKAGE_REMOVED)
+            addAction(Intent.ACTION_PACKAGE_CHANGED)
+            addAction(Intent.ACTION_PACKAGE_REPLACED)
+            addDataScheme("package")
+        }
+        registerReceiver(packageChanges, filter, Context.RECEIVER_NOT_EXPORTED)
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(packageChanges)
+        synchronized(callerLock) { verifiedUid = null }
+        super.onDestroy()
+    }
+
+    private fun checkCaller() = synchronized(callerLock) {
         val uid = Binder.getCallingUid()
-        val app = packageManager.getApplicationInfo("apps.mosaicos.timty", 0)
+        if (verifiedUid == uid) return@synchronized
+        val app = packageManager.getApplicationInfo("apps.mosaicos.tabiti", 0)
         check(uid == app.uid && app.flags and ApplicationInfo.FLAG_SYSTEM != 0 &&
-            packageManager.checkSignatures("apps.mosaicos.timty", "android") == 0)
+            packageManager.checkSignatures("apps.mosaicos.tabiti", "android") == 0)
+        verifiedUid = uid
     }
 
     override fun onBind(intent: Intent?): IBinder = object : IModelStore.Stub() {
@@ -67,6 +100,18 @@ class ModelStoreService : Service() {
         override fun reportCorrupt(modelId: String, lease: IModelLease) {
             checkCaller()
             repository.corrupt(modelId, lease)
+        }
+        override fun getSelectedSpeechModelId(): String? {
+            checkCaller()
+            return repository.selectedSpeechModelId()
+        }
+        override fun getSelectedSpeechModelIdForLanguage(language: String): String? {
+            checkCaller()
+            return repository.selectedSpeechModelId(language)
+        }
+        override fun setSelectedSpeechModelId(modelId: String) {
+            checkCaller()
+            repository.selectSpeechModel(modelId)
         }
     }
 }

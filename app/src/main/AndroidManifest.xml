@@ -29,12 +29,12 @@
         android:memtagMode="async">
 
         <provider android:name=".models.ModelSettingsProvider"
-            android:authorities="${applicationId}.model-settings" android:exported="false" />
+            android:authorities="${applicationId}.model-settings" android:exported="false" android:process=":models" />
         <activity android:name=".models.OfflineModelsActivity"
             android:excludeFromRecents="true" android:exported="true" android:process=":models" />
         <service android:name=".models.ModelStoreService"
             android:exported="true" android:process=":models"
-            android:permission="apps.mosaicos.timty.permission.READ_MODELS" />
+            android:permission="apps.mosaicos.tabiti.permission.READ_MODELS" />
         <service android:name=".models.ModelImportService"
             android:exported="false" android:process=":models"
             android:foregroundServiceType="specialUse">

@@ -145,4 +145,9 @@
 
     <string name="dont_show_again">Don\'t show again</string>
     <string name="new_window">New window</string>
+    <string name="models_guide_note">
+        The recommended download includes a chat model and an English voice input model.
+        Download Hungarian voice output (Anna) separately. Settings and model screens follow the system language.
+    </string>
+    <string name="models_speech_choice_description">Use %1$s for voice input</string>
 </resources>

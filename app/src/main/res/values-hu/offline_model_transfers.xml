@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="models_preparing">
+        Offline modellek előkészítése
+    </string>
+    <string name="models_network_paused">
+        A letöltés szünetel, mert a hálózat nem érhető el. A letöltött adatok megmaradtak. Ön később folytathatja a
+        letöltést.
+    </string>
+    <string name="models_space_paused">
+        A letöltés szünetel, mert kevés a szabad tárhely. A letöltött adatok megmaradtak. A folytatáshoz szabadítson
+        fel tárhelyet.
+    </string>
+    <string name="models_publish_pending">
+        Az ellenőrzött modell megmaradt. Az aktuális használat befejezése után válik elérhetővé.
+    </string>
+</resources>

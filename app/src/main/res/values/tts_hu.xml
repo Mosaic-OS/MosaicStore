@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 The MosaicOS Project; SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="models_voice_output_hungarian">Hungarian voice output</string>
+    <string name="models_voice_anna">Anna - Tabiti’s Hungarian voice output</string>
+    <string name="models_voice_anna_detail">
+        Tabiti’s built-in Hungarian voice output. Tabiti prefers this voice when it is ready. Other apps can use
+        it by selecting Tabiti as their speech engine.
+    </string>
+    <string name="models_voice_output_unavailable">
+        Hungarian voice output is unavailable in this system catalog.
+    </string>
+</resources>

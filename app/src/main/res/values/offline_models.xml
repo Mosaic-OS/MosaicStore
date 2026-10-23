@@ -15,8 +15,14 @@
     limitations under the License.
 -->
 <resources>
-    <string name="models_title">Manage offline models</string>
-    <string name="models_intro">Timty\'s assistance is optional, but it does not work without a model. Download the recommended model for typed and spoken questions and the optional English speech model, or import the files shown below. Opening Timty never starts a download. The assistant uses additional storage to respond faster.</string>
+    <string name="models_title">Offline models</string>
+    <string name="models_intro">
+        Tabiti's assistance is optional, but it needs a model to work. English voice input uses Whisper base.en
+        or small.en. Choose an English voice input model below.
+        Hungarian voice output uses the separate Anna model download. Tabiti has no internet access, MosaicStore
+        downloads its models. Opening Tabiti does not start a download. Saved model state uses additional
+        storage to make later starts faster.
+    </string>
     <string name="models_recommended">(recommended)</string>
     <string name="models_in_use">Current model</string>
     <string name="models_chat_choice">Use as current model</string>
@@ -26,7 +32,7 @@
     <string name="models_import_bundled">Import included model</string>
     <string name="models_delete">Delete model</string>
     <string name="models_deleted">Model deleted</string>
-    <string name="models_delete_failed">Could not delete the model. Try again after stopping the assistant.</string>
+    <string name="models_delete_failed">Could not delete the model. Stop using it and try again.</string>
     <string name="models_import_done">Offline model ready to use</string>
     <string name="models_import_failed">Download or import cancelled or failed. Check your connection, free space and selected file. Previously installed models are kept.</string>
     <string name="models_absent">Not installed</string>
@@ -36,30 +42,58 @@
     <string name="models_corrupt">Model could not be used safely. Download or import it again.</string>
     <string name="models_ready">Ready</string>
     <string name="models_importing">Importing</string>
-    <string name="models_removing">Stopping the assistant and removing model</string>
+    <string name="models_removing">Removing model data</string>
     <string name="models_unavailable">Model storage unavailable</string>
     <string name="models_operation">Offline model operation in progress</string>
     <string name="models_download">Download</string>
-    <string name="models_resume">Resume download</string>
+    <string name="models_resume">Continue</string>
     <string name="models_pause">Pause</string>
     <string name="models_paused">Paused</string>
-    <string name="models_partial_kept">Download paused or interrupted. Resume to continue, or Cancel to discard it.</string>
+    <string name="models_partial_kept">Download paused or interrupted. Tap Continue to resume it, or Cancel to discard it.</string>
     <string name="models_cancelled">Download cancelled.</string>
     <string name="models_cleanup_failed">Could not discard the unfinished download. Try Cancel or Delete model again.</string>
     <string name="models_free">Available storage: %1$s</string>
     <string name="models_allocation">Model storage used: %1$s</string>
     <string name="models_progress">%1$s %2$s</string>
-    <string name="models_expected">Expected import file: %1$s\nSize: %2$s (%3$d bytes)</string>
+    <string name="models_expected">File: %1$s\nExact size: %2$d bytes</string>
     <string name="models_chat_2b">Qwen 3.5 2B</string>
     <string name="models_chat_4b">Qwen 3.5 4B</string>
-    <string name="models_speech">Whisper Base English</string>
-    <string name="models_smaller_capable">This device can also run the larger 4B model, which gives better answers.</string>
+    <string name="models_speech">Whisper base.en (English)</string>
+    <string name="models_smaller_capable">
+        This device can also use the larger 4B chat model. Answer quality varies by requests too.
+    </string>
     <string name="models_larger_not_rated">This device is not rated for the 4B model. It may run very slowly.</string>
     <string name="models_oversized_title">Install the 4B model?</string>
     <string name="models_oversized_warning">The 4B model is not meant for this hardware and may run very slowly. Continue installing it?</string>
     <string name="models_continue">Continue</string>
     <string name="models_download_consent">Download %1$s (%2$d bytes)?\n\nSource and allowed delivery hosts: %3$s. They can see your IP address and requested file. No account, cookies, device identifier or assistant content is sent. Your configured VPN or Tor VPN must include MosaicStore to cover this transfer.</string>
-    <string name="models_metered">The current connection is metered or unavailable. Allow metered data for this transfer? Consent expires when it stops, resume asks again if needed.</string>
+    <string name="models_metered">
+        The connection is metered or unavailable. Data charges may apply to the exact total above. Allow metered
+        data for these files? Consent ends when this download or bundle stops, retry asks again.
+    </string>
     <string name="models_allow_metered">Allow metered download</string>
-    <string name="models_delete_consent">Stop the assistant and delete this model and its saved data? Original source files are kept.</string>
+    <string name="models_delete_consent">
+        Stop using this model and delete it and its saved data? Original source files are kept.
+    </string>
+    <string name="models_recommended_title">Recommended for this phone</string>
+    <string name="models_other_title">Other models</string>
+    <string name="models_about_size">About %1$s</string>
+    <string name="models_download_recommended">Download recommended (about %1$s)</string>
+    <string name="models_recommended_ready">Recommended models ready</string>
+    <string name="models_bundle_file">%1$s (%2$d bytes)</string>
+    <string name="models_item_failed">This download did not finish. Ready models are kept.</string>
+    <string name="models_retry">Retry download</string>
+    <string name="models_network_cost">
+        Metered data may incur charges. These downloads pause if the connection becomes metered, continuing then
+        needs your consent.
+    </string>
+    <string name="models_voice_english">English voice input</string>
+    <string name="models_category_expanded">Expanded</string>
+    <string name="models_category_collapsed">Collapsed</string>
+    <string name="models_speech_en_small">Whisper small.en (English)</string>
+    <string name="models_speech_faster">Smaller voice input model</string>
+    <string name="models_speech_accurate">Larger voice input model - accuracy depends on the recording too.</string>
+    <string name="models_speech_choice">Use for voice input</string>
+    <string name="models_speech_in_use">Voice input model</string>
+    <string name="models_recommended_unavailable">A recommended model is unavailable in this system catalog.</string>
 </resources>

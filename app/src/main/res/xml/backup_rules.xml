@@ -6,6 +6,7 @@
         <include
             domain="sharedpref"
             path="seamlessUpdate" />
+        <include domain="sharedpref" path="offline-model-selections" />
 
 <!--    release channel overrides -->
         <include
@@ -15,6 +16,7 @@
     </cloud-backup>
     <device-transfer>
         <include domain="sharedpref" path="seamlessUpdate" />
+        <include domain="sharedpref" path="offline-model-selections" />
         <include domain="sharedpref" path="app_channel" />
     </device-transfer>
 </data-extraction-rules>

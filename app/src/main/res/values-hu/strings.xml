@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mosaic Store</string>
+    <string name="pkg_source_mosaicos" translatable="false">MosaicOS</string>
 
     <string name="pkg_status_disabled">Kikapcsolva</string>
     <string name="pkg_status_update_available">Frissítés elérhető (%1$s)</string>
@@ -147,4 +148,10 @@
     <!-- Új stringek -->
     <string name="new_window">Új ablak</string>
 
+    <string name="models_guide_note">
+        Az ajánlott letöltés egy csevegőmodellt és egy angol hangbeviteli modellt tartalmaz.
+        A magyar felolvasó hangot (Anna) külön töltheti le. A beállítások és a modellképernyők a rendszer
+        nyelvét követik.
+    </string>
+    <string name="models_speech_choice_description">%1$s használata hangbevitelhez</string>
 </resources>

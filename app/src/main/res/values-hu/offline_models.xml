@@ -15,8 +15,14 @@
     limitations under the License.
 -->
 <resources>
-    <string name="models_title">Offline modellek kezelése</string>
-    <string name="models_intro">Timty segítsége opcionális, de modell nélkül nem működik. Töltse le az ajánlott modellt a gépelt és kimondott kérdésekhez, valamint az opcionális angol beszédfelismerő modellt, vagy importálja az alább látható fájlokat. A MosaicAssistant megnyitása nem indít automatikus letöltést. Az asszisztens további tárhelyet használ a gyorsabb válaszadás érdekében.</string>
+    <string name="models_title">Offline modellek</string>
+    <string name="models_intro">
+        A Tabiti használata opcionális, de modell nélkül nem működik. Az angol hangbevitelhez Whisper
+        base.en vagy small.en modell használható. Alább válasszon angol hangbeviteli modellt.
+        A magyar felolvasó hanghoz az Anna modell külön letöltése szükséges. A
+        Tabitinek nincs internet-hozzáférése, a modelljeit a MosaicStore tölti le. A Tabiti megnyitása nem indít
+        letöltést. A mentett modellállapot további tárhelyet használ a későbbi indítások gyorsításához.
+    </string>
     <string name="models_recommended">(ajánlott)</string>
     <string name="models_in_use">Aktuális modell</string>
     <string name="models_chat_choice">Beállítás aktuális modellként</string>
@@ -26,7 +32,9 @@
     <string name="models_import_bundled">Mellékelt modell importálása</string>
     <string name="models_delete">Modell törlése</string>
     <string name="models_deleted">Modell törölve</string>
-    <string name="models_delete_failed">Nem sikerült törölni a modellt. Próbálja újra az asszisztens leállítása után.</string>
+    <string name="models_delete_failed">
+        Nem sikerült törölni a modellt. Állítsa le a használatát, majd próbálja újra.
+    </string>
     <string name="models_import_done">Offline modell használatra kész</string>
     <string name="models_import_failed">A letöltés vagy importálás megszakadt vagy sikertelen volt. Ellenőrizze a kapcsolatot, a szabad tárhelyet és a kiválasztott fájlt. A korábban telepített modellek megmaradnak.</string>
     <string name="models_absent">Nincs telepítve</string>
@@ -36,26 +44,62 @@
     <string name="models_corrupt">A modell nem használható biztonságosan. Töltse le vagy importálja újra.</string>
     <string name="models_ready">Kész</string>
     <string name="models_importing">Importálás</string>
-    <string name="models_removing">Az asszisztens leállítása és a modell eltávolítása</string>
+    <string name="models_removing">Modelladatok eltávolítása</string>
     <string name="models_unavailable">A modelltároló nem érhető el</string>
     <string name="models_operation">Offline modellművelet folyamatban</string>
     <string name="models_download">Letöltés</string>
-    <string name="models_resume">Letöltés folytatása</string>
+    <string name="models_resume">Folytatás</string>
     <string name="models_pause">Szüneteltetés</string>
     <string name="models_paused">Szüneteltetve</string>
-    <string name="models_partial_kept">A letöltés szüneteltetve vagy megszakítva. A folytatáshoz válassza a folytatást, vagy a törléshez a Mégse lehetőséget.</string>
+    <string name="models_partial_kept">A letöltés szüneteltetve vagy megszakítva. A folytatáshoz válassza a Folytatás, az elvetéshez a Mégse lehetőséget.</string>
     <string name="models_cancelled">Letöltés megszakítva.</string>
     <string name="models_cleanup_failed">Nem sikerült elvetni a befejezetlen letöltést. Próbálja meg újra a Mégse vagy a Modell törlése műveletet.</string>
     <string name="models_free">Elérhető tárhely: %1$s</string>
     <string name="models_allocation">Felhasznált modelltárhely: %1$s</string>
-	<string name="models_expected">Várt importfájl: %1$s\nMéret: %2$s (%3$d bájt)</string>
-    <string name="models_smaller_capable">Ez az eszköz képes futtatni a nagyobb, 4B-s modellt is, amely jobb válaszokat ad.</string>
+    <string name="models_progress">%1$s %2$s</string>
+    <string name="models_expected">Fájl: %1$s\nPontos méret: %2$d bájt</string>
+    <string name="models_chat_2b">Qwen 3.5 2B</string>
+    <string name="models_chat_4b">Qwen 3.5 4B</string>
+    <string name="models_speech">Whisper base.en (angol)</string>
+    <string name="models_smaller_capable">
+        Ez az eszköz a nagyobb, 4B-s csevegőmodellt is használhatja. A válaszok minősége a kéréstől is függ.
+    </string>
     <string name="models_larger_not_rated">Ez az eszköz nincs minősítve a 4B-s modellhez. A modell futtatása nagyon lassú lehet.</string>
     <string name="models_oversized_title">Telepíti a 4B-s modellt?</string>
     <string name="models_oversized_warning">A 4B-s modell nem ehhez a hardverhez készült, és nagyon lassú válaszadást eredményezhet. Folytatja a telepítést?</string>
     <string name="models_continue">Folytatás</string>
     <string name="models_download_consent">Letölti a következőt: %1$s (%2$d bájt)?\n\nForrás és engedélyezett kiszolgáló gazdagépek: %3$s. Ezek láthatják az IP-címét és a kért fájlt. A rendszer nem küld fiókadatokat, sütiket, eszközazonosítót vagy asszisztens-tartalmat. A beállított VPN-nek vagy Tor VPN-nek tartalmaznia kell a MosaicStore-t az adatátvitel biztosításához.</string>
-    <string name="models_metered">A jelenlegi kapcsolat korlátozott adatforgalmú vagy nem érhető el. Engedélyezi a korlátozott adatforgalmú kapcsolat használatát ehhez az átvitelhez? Az engedély a kapcsolat megszűnésével lejár, folytatáskor a rendszer szükség esetén újra rákérdez.</string>
+    <string name="models_metered">
+        A kapcsolat korlátozott adatforgalmú vagy nem érhető el. A fenti pontos összméret után adatforgalmi díj
+        merülhet fel. Engedélyezi ezen fájlok letöltését ilyen kapcsolaton? Az engedély a letöltés vagy csomag
+        leállásakor lejár, újrapróbáláskor ismét rákérdezünk.
+    </string>
     <string name="models_allow_metered">Korlátozott adatforgalmú letöltés engedélyezése</string>
-    <string name="models_delete_consent">Leállítja az asszisztenst, és törli ezt a modellt, valamint a hozzá tartozó mentett adatokat? Az eredeti forrásfájlok megmaradnak.</string>
+    <string name="models_delete_consent">
+        Leállítja ennek a modellnek a használatát, és törli a modellt, valamint a mentett adatait? Az eredeti
+        forrásfájlok megmaradnak.
+    </string>
+    <string name="models_recommended_title">Ehhez a telefonhoz ajánlott</string>
+    <string name="models_other_title">További modellek</string>
+    <string name="models_about_size">Körülbelül %1$s</string>
+    <string name="models_download_recommended">Ajánlott modellek letöltése (kb. %1$s)</string>
+    <string name="models_recommended_ready">Az ajánlott modellek készen állnak</string>
+    <string name="models_bundle_file">%1$s (%2$d bájt)</string>
+    <string name="models_item_failed">Ez a letöltés nem fejeződött be. A kész modellek megmaradnak.</string>
+    <string name="models_retry">Letöltés újrapróbálása</string>
+    <string name="models_network_cost">
+        Korlátozott adatforgalmú kapcsolaton díj merülhet fel. Ha a kapcsolat ilyenre vált, a letöltés szünetel.
+        A folytatáshoz az Ön engedélye szükséges.
+    </string>
+    <string name="models_voice_english">Angol hangbevitel</string>
+    <string name="models_category_expanded">Kibontva</string>
+    <string name="models_category_collapsed">Összecsukva</string>
+    <string name="models_speech_en_small">Whisper small.en (angol)</string>
+    <string name="models_speech_faster">Kisebb hangbeviteli modell</string>
+    <string name="models_speech_accurate">Nagyobb hangbeviteli modell - a pontosság a felvételtől is függ.</string>
+    <string name="models_speech_choice">Használat hangbevitelhez</string>
+    <string name="models_speech_in_use">A hangbevitel modellje</string>
+    <string name="models_recommended_unavailable">
+        Egy ajánlott modell nem érhető el a rendszer jelenlegi katalógusában.
+    </string>
 </resources>
