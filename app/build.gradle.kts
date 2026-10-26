@@ -50,7 +50,7 @@ android {
         applicationId = "apps.mosaicos.io"
         minSdk = 31
         targetSdk = 37
-        versionCode = 8
+        versionCode = 9
         versionName = versionCode.toString()
 
         buildConfigField(
