@@ -17,7 +17,7 @@
 <resources>
     <string name="models_title">Offline models</string>
     <string name="models_intro">
-        Tabiti's assistance is optional, but it needs a model to work. English voice input uses Whisper base.en
+        Tabiti\'s assistance is optional, but it needs a model to work. English voice input uses Whisper base.en
         or small.en. Choose an English voice input model below.
         Hungarian voice output uses the separate Anna model download. Tabiti has no internet access, MosaicStore
         downloads its models. Opening Tabiti does not start a download. Saved model state uses additional
